@@ -98,7 +98,7 @@ class ProjectController extends Controller
 
         $newProject = new Project();
         $newProject->fill($data);
-        $newProject->technologies()->sync($data['technologies']);
+        $newProject->technologies()->sync($data['technologies'] ?? []);
         $newProject->save();
 
         return redirect()->route('admin.projects.index')->with('message', "The project $newProject->title has been created succesfully")->with('message_class', 'success');
@@ -154,7 +154,7 @@ class ProjectController extends Controller
             Storage::delete($project->image);
         }
 
-        $project->technologies()->sync($formData['technologies']);
+        $project->technologies()->sync($formData['technologies'] ?? []);
         $project->update($formData);
         return redirect()->route('admin.projects.index', compact('project'))->with('message', "The project $project->title has been updated succesfully")->with('alert-type', 'info');
     }
