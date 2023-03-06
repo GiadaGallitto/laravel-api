@@ -60,8 +60,11 @@ class ProjectController extends Controller
 
     public function index()
     {
-        $projects = Project::orderBy('start_date', 'DESC')->paginate(20);
-        
+        if (Auth::user()->roles()->pluck('id')->contains('1') || Auth::user()->roles()->pluck('id')->contains('2')) {            
+            $projects = Project::orderBy('start_date', 'DESC')->paginate(20);
+        } else {
+            $projects = Project::where('user_id', Auth::user()->id)->orderBy('start_date', 'DESC')->paginate(20);
+        };
         $trashed = Project::onlyTrashed()->get()->count();
         return view('admin.projects.index', compact('projects', 'trashed'));
     }
