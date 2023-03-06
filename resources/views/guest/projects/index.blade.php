@@ -8,7 +8,7 @@
                     <div class="col-12">
                         <div class="card mt-4 p-4 text-center">
                             <div class="card-header">
-                                <strong>Author: </strong>{{ $project->author }}
+                                <strong>Author: </strong>{{ $project->user_id }}
                             </div>
                             <div class="card-body">
                                 <div class="card-title">

@@ -79,7 +79,7 @@
         @enderror
     </div>
 
-    <div class="mb-3">
+    {{-- <div class="mb-3">
         <label for="author">Author</label>
         <input type="text" class="form-control @error('author') is-invalid @enderror" id="author" name="author" value="{{ old('author',$project->author) }}">
         @error ('author')
@@ -87,7 +87,7 @@
                 {{$message}}
             </div>
         @enderror
-    </div>
+    </div> --}}
 
     
     <div class="mb-3">

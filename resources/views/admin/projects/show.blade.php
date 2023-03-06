@@ -6,7 +6,7 @@
             <div class="card mt-4 p-4 text-center">
                 <div class="card-header mb-2">
                     <h4>
-                        <strong>Author: </strong>{{ $project->author }}
+                        <strong>Author: </strong>{{ $project->user_id }}
                     </h4>
                 </div>
                 <div class="d-flex justify-content-between mb-1">

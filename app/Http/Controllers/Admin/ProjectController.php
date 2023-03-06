@@ -27,7 +27,7 @@ class ProjectController extends Controller
         $this->rules = [
             'title' => 'required|min:5|max:15|unique:projects',
             'description' => 'required|min:15',
-            'author' => 'required',
+            // 'author' => 'required',
             'argument' => 'required|min:5|max:100',
             'start_date' => 'required',
             'image' => 'required',
@@ -44,7 +44,7 @@ class ProjectController extends Controller
             'description.required' => 'E\' necessaria una descrizione',
             'description.min' => 'Lunghezza insufficente per la descrizione',
 
-            'author.required' => 'E\' necessario un autore',
+            // 'author.required' => 'E\' necessario un autore',
 
             'argument.required' => 'Inserire l\'argomento',
             'argument.min' => 'Argomento troppo corto',
@@ -85,14 +85,12 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $request->validate($this->rules, $this->messages);
         if (!array_key_exists('concluded', $data)) {
             $data['concluded'] = false;
         }
 
-        $request->validate($this->rules, $this->messages);
-
-        $data['author'] = Auth::user()->name;
+        $data['user_id'] = Auth::user()->id;
         $data['slug'] = Str::slug($data['title']);
         $data['image'] = Storage::put('imgs/', $data['image']);
 
@@ -139,12 +137,10 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        $formData = $request->all();
-
         $newRules = $this->rules;
         $newRules['title'] = ['required', 'min:5', 'max:15', Rule::unique('projects')->ignore($project->id)];
-
-        $request->validate($newRules, $this->messages);
+        
+        $formData = $request->validate($newRules, $this->messages);
 
         if (!array_key_exists('concluded', $formData)) {
             $formData['concluded'] = false;

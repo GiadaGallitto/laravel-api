@@ -40,7 +40,7 @@
                             <th scope="row" class="align-middle">{{ $project->id }}</th>
                             <td class="align-middle">{{ $project->title }}</td>
                             <td class="align-middle">{{ $project->start_date }}</td>
-                            <td class="align-middle">{{ $project->author }}</td>
+                            <td class="align-middle">{{ $project->user_id }}</td>
                             <td class="align-middle">
                                 @forelse ($project->technologies as $technology)
                                     <span class="me-1">
