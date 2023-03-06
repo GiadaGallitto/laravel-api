@@ -38,7 +38,7 @@
                             <th scope="row" class="align-middle">{{ $project->id }}</th>
                             <td class="align-middle">{{ $project->title }}</td>
                             <td class="align-middle">{{ $project->start_date }}</td>
-                            <td class="align-middle">{{ $project->user_id }}</td>
+                            <td class="align-middle">{{ $project->user->name }}</td>
                             <td class="align-middle">
                                 <form action="{{ route('admin.projects.toggle', $project->slug) }}" method="POST">
                                     @method('PATCH')
